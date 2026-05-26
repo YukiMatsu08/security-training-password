@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社内情報セキュリティ研修：パスワード・アカウント管理編</title>
+  <!-- 外観（CSS）の読み込み -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="app">
+
+    <!-- ==========================================
+         画面①：トップ兼スタート画面
+         ========================================== -->
+    <section id="screen-start" class="screen">
+      <div class="start-container">
+        <p class="subtitle">全社員必須 eラーニング</p>
+        <h1>社内情報セキュリティ研修<br><span class="highlight">パスワード・アカウント管理編</span></h1>
+
+        <div class="login-form">
+          <label for="user-name">受講者名を入力してください</label>
+          <input type="text" id="user-name" placeholder="例：山田 太郎" autocomplete="off">
+          <button id="btn-start" class="btn">研修を開始する</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         画面②：メニュー画面（テーブル一体型）
+         ========================================== -->
+    <section id="screen-menu" class="screen" style="display: none;">
+      <div class="menu-header">
+        <h2>研修メニュー</h2>
+        <p class="welcome-msg">受講者: <span id="display-user-name">---</span> さん</p>
+      </div>
+
+      <p class="menu-lead">受講する章を選択してください。すべての講義を受講後、理解度チェッククイズに合格すると修了です。</p>
+
+      <!-- 学習状況を一元管理する1つの大きな表 -->
+      <table class="menu-table">
+        <thead>
+          <tr>
+            <th class="col-title">講義・クイズ項目</th>
+            <th class="col-count">視聴回数</th>
+            <th class="col-time">視聴時間 / 結果</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 第1章 -->
+          <tr data-chapter="1">
+            <td><button class="menu-table-btn">第1章：なぜ使い回しは危険？</button></td>
+            <td><span class="count">0</span> 回</td>
+            <td><span class="time">0分00秒</span></td>
+          </tr>
+          <!-- 第2章 -->
+          <tr data-chapter="2">
+            <td><button class="menu-table-btn">第2章：オフィスに潜む罠（付箋・メモ）</button></td>
+            <td><span class="count">0</span> 回</td>
+            <td><span class="time">0分00秒</span></td>
+          </tr>
+          <!-- 第3章 -->
+          <tr data-chapter="3">
+            <td><button class="menu-table-btn">第3章：推測されやすい危険なパスワード</button></td>
+            <td><span class="count">0</span> 回</td>
+            <td><span class="time">0分00秒</span></td>
+          </tr>
+          <!-- 第4章 -->
+          <tr data-chapter="4">
+            <td><button class="menu-table-btn">第4章：正しい管理方法</button></td>
+            <td><span class="count">0</span> 回</td>
+            <td><span class="time">0分00秒</span></td>
+          </tr>
+          <!-- 第5章 -->
+          <tr data-chapter="5">
+            <td><button class="menu-table-btn">第5章：最後の砦「多要素認証」</button></td>
+            <td><span class="count">0</span> 回</td>
+            <td><span class="time">0分00秒</span></td>
+          </tr>
+          
+          <!-- クイズ行（最下部） -->
+          <tr class="quiz-row">
+            <td><button id="btn-goto-quiz" class="menu-table-btn quiz-btn">🏆 理解度チェッククイズ</button></td>
+            <td class="text-muted">--</td>
+            <td><span id="quiz-status-badge" class="badge status-unvisited">未受験</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ==========================================
+         画面③：講義画面（1ページ1画像スタイル）
+         ========================================== -->
+    <section id="screen-study" class="screen" style="display: none;">
+      <!-- 上部ナビゲーション -->
+      <div class="study-header">
+        <span id="study-chapter-title" class="chapter-title">第1章：なぜ使い回しは危険？</span>
+        <button id="btn-back-to-menu" class="btn-secondary">メニューに戻る</button>
+      </div>
+
+      <!-- メインコンテンツエリア -->
+      <div class="study-content">
+        <!-- 画像表示エリア -->
+        <div class="study-image-box">
+          <img id="study-image" src="assets/img1.png" alt="講義イメージ画像">
+        </div>
+        
+        <!-- 解説テキストエリア -->
+        <div class="study-text-box">
+          <p id="study-description">
+            ここに解説文が動的に表示されます。
+          </p>
+        </div>
+      </div>
+
+      <!-- 下部コントロールエリア -->
+      <div class="study-footer">
+        <button id="btn-complete-chapter" class="btn">読了してメニューに戻る</button>
+      </div>
+    </section>
+
+   <!-- ==========================================
+         画面④：理解度チェッククイズ画面（一括回答スタイル）
+         ========================================== -->
+    <section id="screen-quiz" class="screen" style="display: none;">
+      <div class="quiz-header">
+        <h2>理解度チェッククイズ</h2>
+        <p class="quiz-lead">すべての問題に解答し、最下部の「解答を送信して採点する」ボタンを押してください。</p>
+      </div>
+
+      <!-- 全問題が縦に並ぶエリア -->
+      <div id="quiz-full-list">
+        <!-- ここにJavaScriptで全3問が自動生成されます -->
+      </div>
+
+      <!-- 最終結果発表＆解説エリア（最初は非表示） -->
+      <div id="quiz-result-summary" class="quiz-result-box" style="display: none;">
+        <h3>採点結果</h3>
+        <p class="result-score">3問中 <span id="correct-count-display">0</span>問 正解</p>
+        <p id="result-message" class="result-msg-text">メッセージがここに入ります。</p>
+        <button id="btn-finish-quiz" class="btn">結果を確定してメニューに戻る</button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- 動き（JavaScript）の読み込み -->
+  <script src="script.js"></script>
+</body>
+
+</html>
